@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-mainColors-bg  bg-cover text-mainColors-text fill-mainColors-text;
+  font-family: 'Nunito', sans-serif;
+}
+
+hr {
+  @apply text-mainColors-hr-bg;
+}
+
+@layer components {
+  ._grid-three-columns {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4;
+  }
+
+  ._grid-two-columns {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-4;
+  }
+
+  ._grid-one-column {
+    @apply space-y-4;
+  }
+}
