@@ -25,6 +25,7 @@ import { required } from '@vuelidate/validators'
 
 const rules = {
   name: { required },
+  number: { required },
   year: { required },
 }
 const v = useVuelidate(rules, model)
@@ -34,8 +35,9 @@ function open() {
   isOpenModal.value = true
   v.value.$reset()
   if (props.type == 'add') {
-    model.name = ''
+    model.name = '"Водное хозяйство России: проблемы, технологии, управление"'
     model.year = new Date().getFullYear()
+    model.number = issuesStore.getNewNumber(model.year)
   }
   if (props.type == 'edit') {
     for (let key in props.issuesItem) {
@@ -79,6 +81,16 @@ async function remove() {
               css="w-full"
             />
             <FormWarning :errors="v.name.$errors" />
+          </div>
+
+          <div>
+            <FormInput
+              id="number"
+              v-model="model.number"
+              label="Номер"
+              css="w-full"
+            />
+            <FormWarning :errors="v.number.$errors" />
           </div>
 
           <div>

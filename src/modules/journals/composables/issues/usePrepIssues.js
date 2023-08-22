@@ -7,7 +7,9 @@ export function usePrepIssues(options = {}) {
   const issuesStore = useIssuesStore()
   const filters = useFiltersIssues()
 
-  const search = useSearch((issue) => `${issue.name} ${issue.year}`)
+  const search = useSearch(
+    (issue) => `${issue.name} ${issue.year} ${issue.number}`
+  )
 
   const issuesPrep = computed(() => {
     let data = issuesStore.issuesList

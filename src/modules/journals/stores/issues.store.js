@@ -32,11 +32,17 @@ export const useIssuesStore = defineStore('issues', () => {
     return getMaxOrd(issuesByYear) + 1
   }
 
+  const getNewNumber = (year) => {
+    const issuesByYear = getByYear(year)
+    return Math.max(...issuesByYear.map((e) => e.number), 0) + 1
+  }
+
   const load = async () => {
     try {
       issuesList.value = await api.load()
       sort()
     } catch (error) {
+      console.log('error', error)
       errorsStore.addError({ message: error.message })
     }
   }
@@ -99,6 +105,7 @@ export const useIssuesStore = defineStore('issues', () => {
     issuesList,
     getById,
     getByYear,
+    getNewNumber,
     load,
     create,
     update,

@@ -38,7 +38,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  function singOut() {
+  function signOut() {
     setUser()
     localStorage.removeItem('user')
     timeLimit.value = 0
@@ -51,6 +51,6 @@ export const useAuthStore = defineStore('auth', () => {
     timeLimit,
     setUser,
     signIn,
-    singOut,
+    signOut,
   }
 })

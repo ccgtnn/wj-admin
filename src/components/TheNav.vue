@@ -1,8 +1,11 @@
 <script setup>
-import { computed, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/auth.store'
 
 const route = useRoute()
+const router = useRouter()
+const authStore = useAuthStore()
 
 // главное меню
 const menuList = computed(() => [
@@ -12,6 +15,11 @@ const menuList = computed(() => [
     to: '/p/journals/issues',
   },
 ])
+
+const signOut = () => {
+  authStore.signOut()
+  router.push('/login')
+}
 </script>
 
 <template>
@@ -25,6 +33,9 @@ const menuList = computed(() => [
         >
           {{ menuItem.name }}
         </router-link>
+      </li>
+      <li class="menu-list__item">
+        <button class="menu-list__button" @click="signOut">Выход</button>
       </li>
     </ul>
   </nav>

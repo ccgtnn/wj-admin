@@ -45,6 +45,6 @@ const emit = defineEmits(['moveLeft', 'moveRight', 'moveToStart', 'moveToEnd'])
 
 <style scoped>
 .order-actions {
-  @apply flex gap-4 items-center;
+  @apply flex gap-2 items-center;
 }
 </style>

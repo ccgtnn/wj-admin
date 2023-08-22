@@ -1,4 +1,10 @@
-<script setup></script>
+<script setup>
+import { useIssuesStore } from './stores/issues.store'
+
+const issuesStore = useIssuesStore()
+
+issuesStore.load()
+</script>
 
 <template>
   <div class="journal-module">

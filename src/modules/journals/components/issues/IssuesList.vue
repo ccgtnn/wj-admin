@@ -10,7 +10,7 @@ const issuesPrepCount = inject('issuesPrepCount')
   <div class="list">
     <div class="list__count">Всего {{ issuesPrepCount }}</div>
 
-    <div v-if="issuesPrepCount" class="list__content _grid-three-columns">
+    <div v-if="issuesPrepCount" class="list__content _grid-one-column">
       <IssuesItem
         v-for="item in issuesPrep"
         :key="item.id"

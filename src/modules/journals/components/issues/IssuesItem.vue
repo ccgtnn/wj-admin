@@ -14,34 +14,34 @@ const issuesStore = useIssuesStore()
 
 <template>
   <AppCard :isActive="issuesItem.isFull" class="item">
-    <div class="item__head">
-      <div class="item__title">
-        <div class="item__name">
-          № {{ issuesItem.name }}
-          <span class="name__day">{{ issuesItem.day }}</span>
-        </div>
-        <ModIssuesEditor type="edit" :issuesItem="issuesItem" />
+    <div class="item__title">
+      <div class="item__number">№ {{ issuesItem.number }}</div>
+      <div class="item__year">{{ issuesItem.year }} г.</div>
+      <div class="item__name">
+        {{ issuesItem.name }}
       </div>
-      <div class="item__more">
-        <AppOrderActions
-          @move-left="issuesStore.changeOrder(issuesItem, -1)"
-          @move-right="issuesStore.changeOrder(issuesItem, 1)"
-          @move-to-start="issuesStore.moveToStart(issuesItem)"
-          @move-to-end="issuesStore.moveToEnd(issuesItem)"
-        />
-      </div>
+    </div>
+
+    <div class="item__actions">
+      <ModIssuesEditor type="edit" :issuesItem="issuesItem" />
+      <AppOrderActions
+        @move-left="issuesStore.changeOrder(issuesItem, -1)"
+        @move-right="issuesStore.changeOrder(issuesItem, 1)"
+        @move-to-start="issuesStore.moveToStart(issuesItem)"
+        @move-to-end="issuesStore.moveToEnd(issuesItem)"
+      />
     </div>
   </AppCard>
 </template>
 
 <style scoped>
-.item__head {
+.item {
   @apply py-2 flex justify-between gap-4 items-center;
 }
-.item__more {
+.item__title {
   @apply flex gap-4 items-center;
 }
-.item__title {
-  @apply text-xl flex gap-4 items-center;
+.item__actions {
+  @apply flex gap-4 items-center;
 }
 </style>
