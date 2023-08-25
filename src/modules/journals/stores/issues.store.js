@@ -55,6 +55,7 @@ export const useIssuesStore = defineStore('issues', () => {
       const newIssue = await api.create(issueData)
       issuesList.value.unshift(newIssue)
       sort()
+      return newIssue
     } catch (error) {
       errorsStore.addError({ message: error.message })
     }
