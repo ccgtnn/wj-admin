@@ -19,8 +19,7 @@ const issuesStore = useIssuesStore()
       <div class="item__year">{{ issuesItem.year }} г.</div>
       <div class="item__name">
         <div class="name__ru">{{ issuesItem.name }}</div>
-        <div class="name__en">en: {{ issuesItem.en.name }}</div>
-        <div class="name__fr">fr: {{ issuesItem.fr.name }}</div>
+        <div class="name__en">en: {{ issuesItem.en?.name }}</div>
       </div>
     </div>
 
@@ -30,8 +29,9 @@ const issuesStore = useIssuesStore()
 
     <div class="item__order">
       <AppOrderActions
-        @move-left="issuesStore.changeOrder(issuesItem, -1)"
-        @move-right="issuesStore.changeOrder(issuesItem, 1)"
+        :direction="'vertical'"
+        @move-up="issuesStore.changeOrder(issuesItem, -1)"
+        @move-down="issuesStore.changeOrder(issuesItem, 1)"
         @move-to-start="issuesStore.moveToStart(issuesItem)"
         @move-to-end="issuesStore.moveToEnd(issuesItem)"
       />

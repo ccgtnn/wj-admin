@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 
-const emit = defineEmits(['click'])
+const emit = defineEmits(['confirm'])
 
 defineProps({
   btnName: {
@@ -12,9 +12,9 @@ defineProps({
 
 const isDialogOpen = ref(false)
 
-function remove() {
+function confirm() {
   isDialogOpen.value = false
-  emit('click')
+  emit('confirm')
 }
 </script>
 
@@ -26,7 +26,7 @@ function remove() {
     <div v-else class="confirm__dialog">
       <div class="confirm__text"><slot></slot></div>
       <div class="confirm__actions">
-        <button @click="remove()">{{ btnName }}</button>
+        <button @click="confirm()">{{ btnName }}</button>
         <button @click="isDialogOpen = false">Отмена</button>
       </div>
     </div>

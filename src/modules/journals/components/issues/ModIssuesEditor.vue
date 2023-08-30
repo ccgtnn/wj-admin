@@ -22,16 +22,10 @@ const issueItemEn = computed(() =>
   issuesTranslationStore.getByIssueAndLang(props.issuesItem?.id, 'en')
 )
 
-// перевод на fr
-const issueItemFr = computed(() =>
-  issuesTranslationStore.getByIssueAndLang(props.issuesItem?.id, 'fr')
-)
-
 const isOpenModal = ref(false)
 const model = reactive({
   issue: {},
   en: {},
-  fr: {},
 })
 
 // валидация
@@ -45,9 +39,6 @@ const rules = {
     year: { required },
   },
   en: {
-    name: { required },
-  },
-  fr: {
     name: { required },
   },
 }
@@ -83,17 +74,6 @@ function open() {
       model.en[key] = issueItemEn.value[key]
     }
   }
-
-  // перевод на fr
-  if (!issueItemFr.value) {
-    model.fr.name = 'FRANCH'
-    model.fr.lang = 'fr'
-  } else {
-    // копируем объект
-    for (let key in issueItemFr.value) {
-      model.fr[key] = issueItemFr.value[key]
-    }
-  }
 }
 
 async function save() {
@@ -109,9 +89,6 @@ async function save() {
     // добавляем перевод
     model.en.issueId = newIssue.id
     await saveTranslation(model.en)
-
-    model.fr.issueId = newIssue.id
-    await saveTranslation(model.fr)
   }
   if (props.type == 'edit') {
     await issuesStore.update(model.issue)
@@ -119,9 +96,6 @@ async function save() {
     // добавляем/обновляем перевод
     model.en.issueId = model.issue.id
     await saveTranslation(model.en)
-
-    model.fr.issueId = model.issue.id
-    await saveTranslation(model.fr)
   }
 
   isOpenModal.value = false
@@ -144,11 +118,14 @@ async function remove() {
 
 <template>
   <div class="editor">
-    <AppButton v-if="type == 'add'" @click="open">ДОБАВИТЬ ВЫПУСК</AppButton>
-    <AppButton v-if="type == 'edit'" @click="open">РЕДАКТИРОВАТЬ</AppButton>
+    <AppButton @click="open">
+      {{ type == 'add' ? 'ДОБАВИТЬ ВЫПУСК' : 'РЕДАКТИРОВАТЬ' }}
+    </AppButton>
 
     <AppModal :is-open="isOpenModal" size="md" @close="isOpenModal = false">
-      <template #head>ДОБАВИТЬ ВЫПУСК</template>
+      <template #head>
+        {{ type == 'add' ? 'ДОБАВИТЬ ВЫПУСК' : 'РЕДАКТИРОВАТЬ' }}
+      </template>
       <template #body>
         <div class="form">
           <div>
@@ -169,16 +146,6 @@ async function remove() {
               css="w-full"
             />
             <FormWarning :errors="v.en.name.$errors" />
-          </div>
-
-          <div>
-            <FormInput
-              id="nameFr"
-              v-model="model.fr.name"
-              label="Название (fr)"
-              css="w-full"
-            />
-            <FormWarning :errors="v.fr.name.$errors" />
           </div>
 
           <div>
@@ -205,7 +172,7 @@ async function remove() {
       <template #actions>
         <div class="actions">
           <AppButton @click="save">Сохранить</AppButton>
-          <AppRemoveConfirm v-if="type == 'edit'" @click="remove">
+          <AppRemoveConfirm v-if="type == 'edit'" @confirm="remove">
             Подтвердите, что хотите удалить?
           </AppRemoveConfirm>
         </div>

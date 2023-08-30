@@ -23,8 +23,8 @@ async function validateResponse(response, validator) {
 /**
  * Функция для входа в систему.
  *
- * @param {Object} model - данные пользователя.
- * @return {Promise} возвращает промис с данными пользователя после успешного входа в систему.
+ * @param {Object} model - данные пользователя {login, pasw}.
+ * @return {Object} возвращает {token, user:{id, name}, timeLimit}
  */
 export async function signIn(model) {
   const { data } = await request.post('admin/auth/signIn', model)
