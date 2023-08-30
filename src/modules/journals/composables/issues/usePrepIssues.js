@@ -34,6 +34,19 @@ export function usePrepIssues(options = {}) {
     return data
   })
 
+  const issuesPrepGroupedByYear = computed(() => {
+    // сначала сгруппировать выпуски по годам в объект
+    const grouped = issuesPrep.value.reduce((groups, issue) => {
+      const year = issue.year
+      if (!groups[year]) {
+        groups[year] = []
+      }
+      groups[year].push({ ...issue })
+      return groups
+    }, {})
+    return grouped
+  })
+
   const issuesPrepCount = computed(() => issuesPrep.value.length)
 
   provide('issuesSearchQuery', search.searchQuery)
