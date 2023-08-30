@@ -18,18 +18,18 @@ export function usePrepIssues(options = {}) {
   const issuesPrep = computed(() => {
     let data = issuesStore.issuesList
 
+    // поиск
+    if (search.isActive.value) data = data.filter((e) => search.check(e))
+
+    // фильтры
+    if (filters.isActive.value) data = data.filter((e) => filters.check(e))
+
     data = data.map((e) => {
       // добавляем перевод на англ
       e.en = issuesTranslationStore.getByIssueAndLang(e.id, 'en')
 
       return e
     })
-
-    // поиск
-    if (search.isActive.value) data = data.filter((e) => search.check(e))
-
-    // фильтры
-    if (filters.isActive.value) data = data.filter((e) => filters.check(e))
 
     return data
   })
@@ -44,13 +44,23 @@ export function usePrepIssues(options = {}) {
       groups[year].push({ ...issue })
       return groups
     }, {})
-    return grouped
+
+    // затем преобразовать объект в массив и отсортировать его по годам
+    const sorted = Object.entries(grouped)
+      .map(([year, issuesList]) => ({
+        year,
+        issuesList,
+      }))
+      .sort((a, b) => b.year - a.year)
+
+    return sorted
   })
 
   const issuesPrepCount = computed(() => issuesPrep.value.length)
 
   provide('issuesSearchQuery', search.searchQuery)
   provide('issuesPrep', issuesPrep)
+  provide('issuesPrepGroupedByYear', issuesPrepGroupedByYear)
   provide('issuesPrepCount', issuesPrepCount)
 
   provide('issuesFiltersList', filters.filtersList)

@@ -38,23 +38,6 @@ import IconArrowsUp from '@/components/app/icons/IconArrowsUp.vue'
 import IconArrowsDown from '@/components/app/icons/IconArrowsDown.vue'
 
 export default function (app) {
-  app.component('AppButton', AppButton)
-  app.component('AppCard', AppCard)
-  app.component('AppH1', AppH1)
-  app.component('AppH2', AppH2)
-  app.component('AppProgress', AppProgress)
-  app.component('AppPaginator', AppPaginator)
-  app.component('AppModal', AppModal)
-  app.component('AppRemoveConfirm', AppRemoveConfirm)
-  app.component('AppFilter', AppFilter)
-  app.component('AppOrderActions', AppOrderActions)
-  app.component('AppDropMenu', AppDropMenu)
-
-  app.component('FormInput', FormInput)
-  app.component('FormArea', FormArea)
-  app.component('FormWarning', FormWarning)
-  app.component('FormButtonSave', FormButtonSave)
-
   app.component('IconClose', IconClose)
   app.component('IconCrown', IconCrown)
   app.component('IconSpider', IconSpider)
@@ -77,4 +60,21 @@ export default function (app) {
   app.component('IconArrowDown', IconArrowDown)
   app.component('IconArrowsUp', IconArrowsUp)
   app.component('IconArrowsDown', IconArrowsDown)
+
+  app.component('AppButton', AppButton)
+  app.component('AppCard', AppCard)
+  app.component('AppH1', AppH1)
+  app.component('AppH2', AppH2)
+  app.component('AppProgress', AppProgress)
+  app.component('AppPaginator', AppPaginator)
+  app.component('AppModal', AppModal)
+  app.component('AppRemoveConfirm', AppRemoveConfirm)
+  app.component('AppFilter', AppFilter)
+  app.component('AppOrderActions', AppOrderActions)
+  app.component('AppDropMenu', AppDropMenu)
+
+  app.component('FormInput', FormInput)
+  app.component('FormArea', FormArea)
+  app.component('FormWarning', FormWarning)
+  app.component('FormButtonSave', FormButtonSave)
 }

@@ -2,11 +2,13 @@
 import { inject } from 'vue'
 import IssuesItem from './IssuesItem.vue'
 
+const issuesPrepGroupedByYear = inject('issuesPrepGroupedByYear')
 const issuesPrep = inject('issuesPrep')
 const issuesPrepCount = inject('issuesPrepCount')
 </script>
 
 <template>
+  {{ issuesPrepGroupedByYear }}
   <div class="list">
     <div class="list__count">Всего {{ issuesPrepCount }}</div>
 

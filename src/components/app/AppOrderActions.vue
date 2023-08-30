@@ -1,110 +1,63 @@
 <script setup>
-import { defineEmits } from 'vue'
+import { computed } from 'vue'
+
 const emit = defineEmits([
-  'moveLeft',
-  'moveRight',
+  'moveToPrevious',
+  'moveToNext',
   'moveToStart',
   'moveToEnd',
-  'moveUp',
-  'moveDown',
 ])
+
 const props = defineProps({
   direction: {
     type: String,
-    required: true,
+    default: 'vertical',
   },
+})
+
+// Вычисляемые свойства для определения направления
+const isVertical = computed(() => props.direction === 'vertical')
+const isHorizontal = computed(() => props.direction === 'horizontal')
+
+// Конфигурация кнопок в зависимости от направления
+const verticalButtons = [
+  { icon: 'IconArrowsDown', event: 'moveToEnd', iconSize: 'w-4' },
+  { icon: 'IconArrowDown', event: 'moveToNext', iconSize: 'w-4' },
+  { icon: 'IconArrowUp', event: 'moveToPrevious', iconSize: 'w-4' },
+  { icon: 'IconArrowsUp', event: 'moveToStart', iconSize: 'w-4' },
+]
+
+const horizontalButtons = [
+  { icon: 'IconArrowsLeft', event: 'moveToStart', iconSize: 'w-4' },
+  { icon: 'IconArrowLeft', event: 'moveToPrevious', iconSize: 'w-2.5' },
+  { icon: 'IconArrowRight', event: 'moveToNext', iconSize: 'w-2.5' },
+  { icon: 'IconArrowsRight', event: 'moveToEnd', iconSize: 'w-4' },
+]
+
+// Выбор конфигурации кнопок в зависимости от направления
+const buttons = computed(() => {
+  if (isVertical.value) return verticalButtons
+  if (isHorizontal.value) return horizontalButtons
+  return []
 })
 </script>
 
 <template>
   <div class="order-actions">
-    <div v-if="direction == 'vertical'" class="order-actions__vertical">
-      <!-- Кнопка для сдвига элемента в начало списка -->
-      <AppButton
-        custom-class="icon-class"
-        class="text-sm"
-        @click="emit('moveToEnd')"
-      >
-        <IconArrowsDown class="w-4" />
-      </AppButton>
-
-      <!-- Кнопка для сдвига элемента вниз -->
-      <AppButton
-        custom-class="icon-class"
-        class="text-sm"
-        @click="emit('moveDown')"
-      >
-        <IconArrowDown class="w-4" />
-      </AppButton>
-
-      <!-- Кнопка для сдвига элемента вверх -->
-      <AppButton
-        custom-class="icon-class"
-        class="text-sm"
-        @click="emit('moveUp')"
-      >
-        <IconArrowUp class="w-4" />
-      </AppButton>
-
-      <!-- Кнопка для сдвига элемента в конец списка -->
-      <AppButton
-        custom-class="icon-class"
-        class="text-sm"
-        @click="emit('moveToStart')"
-      >
-        <IconArrowsUp class="w-4" />
-      </AppButton>
-    </div>
-
-    <div v-if="direction == 'horizontal'" class="order-actions__horizontal">
-      <!-- Кнопка для сдвига элемента в начало списка -->
-      <AppButton
-        custom-class="icon-class"
-        class="text-sm"
-        @click="emit('moveToStart')"
-      >
-        <IconArrowsLeft class="w-4" />
-      </AppButton>
-
-      <!-- Кнопка для сдвига элемента влево -->
-      <AppButton
-        custom-class="icon-class"
-        class="text-sm"
-        @click="emit('moveLeft')"
-      >
-        <IconArrowLeft class="w-3" />
-      </AppButton>
-
-      <!-- Кнопка для сдвига элемента вправо -->
-      <AppButton
-        custom-class="icon-class"
-        class="text-sm"
-        @click="emit('moveRight')"
-      >
-        <IconArrowRight class="w-3" />
-      </AppButton>
-
-      <!-- Кнопка для сдвига элемента в конец списка -->
-      <AppButton
-        custom-class="icon-class"
-        class="text-sm"
-        @click="emit('moveToEnd')"
-      >
-        <IconArrowsRight class="w-4" />
-      </AppButton>
-    </div>
+    <AppButton
+      v-for="button in buttons"
+      :key="button.event"
+      custom-class="icon-class"
+      class="text-sm"
+      @click="emit(button.event)"
+    >
+      <component :is="button.icon" :class="button.iconSize" />
+    </AppButton>
   </div>
 </template>
 
 <style scoped>
-/* .order-actions {
-  @apply flex gap-2 items-center;
-} */
-.order-actions__vertical {
-  @apply flex gap-2 items-center;
-}
-
-.order-actions__horizontal {
+.order-actions {
   @apply flex gap-2 items-center;
 }
 </style>

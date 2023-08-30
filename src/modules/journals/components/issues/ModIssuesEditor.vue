@@ -22,7 +22,12 @@ const issueItemEn = computed(() =>
   issuesTranslationStore.getByIssueAndLang(props.issuesItem?.id, 'en')
 )
 
-const isOpenModal = ref(false)
+// управление модальным окном
+const modal = reactive({
+  isOpen: false,
+  size: 'md',
+})
+
 const model = reactive({
   issue: {},
   en: {},
@@ -46,7 +51,7 @@ const v = useVuelidate(rules, model)
 
 // открываем форму
 function open() {
-  isOpenModal.value = true
+  modal.isOpen = true
   v.value.$reset()
 
   if (props.type == 'add') {
@@ -67,6 +72,10 @@ function open() {
   if (!issueItemEn.value) {
     model.en.name =
       '"Water sector of Russia: problems, technologies, management"'
+
+    // если режим редактирования, то не заполняем поле
+    if (props.type == 'edit') model.en.name = ''
+
     model.en.lang = 'en'
   } else {
     // копируем объект
@@ -98,7 +107,7 @@ async function save() {
     await saveTranslation(model.en)
   }
 
-  isOpenModal.value = false
+  modal.isOpen = false
 }
 
 async function saveTranslation(modelTranslation) {
@@ -112,7 +121,7 @@ async function saveTranslation(modelTranslation) {
 
 async function remove() {
   await issuesStore.remove(model.issue.id)
-  isOpenModal.value = false
+  modal.isOpen = false
 }
 </script>
 
@@ -122,7 +131,11 @@ async function remove() {
       {{ type == 'add' ? 'ДОБАВИТЬ ВЫПУСК' : 'РЕДАКТИРОВАТЬ' }}
     </AppButton>
 
-    <AppModal :is-open="isOpenModal" size="md" @close="isOpenModal = false">
+    <AppModal
+      :is-open="modal.isOpen"
+      :size="modal.size"
+      @close="modal.isOpen = false"
+    >
       <template #head>
         {{ type == 'add' ? 'ДОБАВИТЬ ВЫПУСК' : 'РЕДАКТИРОВАТЬ' }}
       </template>
