@@ -9,8 +9,10 @@ export function usePrepIssues(options = {}) {
   const issuesTranslationStore = useIssuesTranslationStore()
   const filters = useFiltersIssues()
 
+  // Инициализируем поиск - передаём строку, составленную из полей объекта issue
   const search = useSearch(
-    (issue) => `${issue.name} ${issue.year} ${issue.number} ${issue.en.name}`
+    (issue) =>
+      `${issue.name} ${issue.year} ${issue.number} ${issue.e?.name ?? ''}`
   )
 
   const issuesPrep = computed(() => {
@@ -18,14 +20,7 @@ export function usePrepIssues(options = {}) {
 
     data = data.map((e) => {
       // добавляем перевод на англ
-      e.en = issuesTranslationStore.getByIssueAndLang(e.id, 'en') ?? {
-        name: '',
-      }
-
-      // добавляем перевод на fr
-      e.fr = issuesTranslationStore.getByIssueAndLang(e.id, 'fr') ?? {
-        name: '',
-      }
+      e.en = issuesTranslationStore.getByIssueAndLang(e.id, 'en')
 
       return e
     })

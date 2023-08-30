@@ -65,7 +65,7 @@ async function signIn() {
       </div>
 
       <div class="form__actions">
-        <AppButton :isLoading="isLoading" @click="signIn">Вход</AppButton>
+        <AppButton :isDisable="isLoading" @click="signIn">Вход</AppButton>
       </div>
 
       <div class="form__errors">

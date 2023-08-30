@@ -32,6 +32,10 @@ import IconArrowRight from '@/components/app/icons/IconArrowRight.vue'
 import IconArrowLeft from '@/components/app/icons/IconArrowLeft.vue'
 import IconArrowsRight from '@/components/app/icons/IconArrowsRight.vue'
 import IconArrowsLeft from '@/components/app/icons/IconArrowsLeft.vue'
+import IconArrowUp from '@/components/app/icons/IconArrowUp.vue'
+import IconArrowDown from '@/components/app/icons/IconArrowDown.vue'
+import IconArrowsUp from '@/components/app/icons/IconArrowsUp.vue'
+import IconArrowsDown from '@/components/app/icons/IconArrowsDown.vue'
 
 export default function (app) {
   app.component('AppButton', AppButton)
@@ -68,4 +72,9 @@ export default function (app) {
   app.component('IconArrowLeft', IconArrowLeft)
   app.component('IconArrowsRight', IconArrowsRight)
   app.component('IconArrowsLeft', IconArrowsLeft)
+
+  app.component('IconArrowUp', IconArrowUp)
+  app.component('IconArrowDown', IconArrowDown)
+  app.component('IconArrowsUp', IconArrowsUp)
+  app.component('IconArrowsDown', IconArrowsDown)
 }

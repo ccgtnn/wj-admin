@@ -11,7 +11,7 @@ export const useAuthStore = defineStore('auth', () => {
     user.name = _user?.name ?? ''
   }
 
-  // первичная инмциализация данных о пользователей
+  // первичная инициализация данных о пользователей
   try {
     setUser(JSON.parse(localStorage.getItem('user') ?? '{}'))
     timeLimit.value = localStorage.getItem('timeLimit') ?? 0
