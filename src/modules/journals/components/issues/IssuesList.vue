@@ -12,8 +12,6 @@ const props = defineProps({
     default: 0,
   },
 })
-
-console.log(props.issuesList)
 </script>
 
 <template>

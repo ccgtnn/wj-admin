@@ -29,8 +29,8 @@ const issuesStore = useIssuesStore()
 
     <div class="item__order">
       <AppOrderActions
-        @move-up="issuesStore.changeOrder(issuesItem, -1)"
-        @move-down="issuesStore.changeOrder(issuesItem, 1)"
+        @move-to-previous="issuesStore.changeOrder(issuesItem, -1)"
+        @move-to-next="issuesStore.changeOrder(issuesItem, 1)"
         @move-to-start="issuesStore.moveToStart(issuesItem)"
         @move-to-end="issuesStore.moveToEnd(issuesItem)"
       />
