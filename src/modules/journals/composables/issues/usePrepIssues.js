@@ -51,6 +51,7 @@ export function usePrepIssues(options = {}) {
 
   provide('issuesSearchQuery', search.searchQuery)
   provide('issuesPrep', issuesPrep)
+  provide('issuesPrepGroupedByYear', issuesPrepGroupedByYear)
   provide('issuesPrepCount', issuesPrepCount)
 
   provide('issuesFiltersList', filters.filtersList)

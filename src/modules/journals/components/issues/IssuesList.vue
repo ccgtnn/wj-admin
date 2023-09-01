@@ -4,12 +4,18 @@ import IssuesItem from './IssuesItem.vue'
 
 const issuesPrep = inject('issuesPrep')
 const issuesPrepCount = inject('issuesPrepCount')
+const issuesPrepGroupedByYear = inject('issuesPrepGroupedByYear')
 </script>
 
 <template>
   <div class="list">
     <div class="list__count">Всего {{ issuesPrepCount }}</div>
-
+    <div
+      v-for="year in issuesPrepGroupedByYear"
+      class="flex flex-col space-y-3"
+    >
+      {{ year }}
+    </div>
     <div v-if="issuesPrepCount" class="list__content _grid-one-column">
       <IssuesItem
         v-for="item in issuesPrep"
