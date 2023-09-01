@@ -12,7 +12,7 @@ export const useSectionsTransStore = defineStore('sectionsTrans', () => {
   const errorsStore = useErrorsStore()
 
   const api = Api({
-    API_URL: 'journal/sectionsTrans',
+    API_URL: 'journal/sectionsTranslation',
     validator: sectionsTransValidator,
     arrayValidator: arraySectionsTransValidator,
   })

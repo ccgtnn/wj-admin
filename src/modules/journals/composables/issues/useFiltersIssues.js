@@ -2,10 +2,12 @@ import { computed, reactive } from 'vue'
 
 // Фильтры для записей
 export function useFiltersIssues() {
-  const filtersList = reactive({})
+  const filtersList = reactive({
+    year: 'ВСЕ',
+  })
 
   // Активен ли хотябы один фильтр?
-  const isActive = computed(() => false)
+  const isActive = computed(() => filtersList.year !== 'ВСЕ')
 
   /**
    * Проверяем запись на соответствие фильтрам
@@ -13,9 +15,11 @@ export function useFiltersIssues() {
    * @returns true/false
    */
   function check(item) {
-    let check = true
+    let isCheck = true
 
-    return check
+    if (item.year != filtersList.year) isCheck = false
+
+    return isCheck
   }
 
   return {

@@ -1,4 +1,7 @@
-# к 1 сентября
+# к 6 сентября
 
-- Создать недостающие страницы на ws-client (чтоб не было страниц с 404)
-- Сделать группировку по годам для issues (по аналогии с ws-client)
+когда запулишь wj-admin сделай npm i
+
+- пройтись по файлам исправить предупреждения eslint
+- реализовать работу с sections, ModSections.vue стартовый блок секций, откр по кнопке Содержание
+- исправить provide('issuesPrepGroupedByYear', yearsPrep) в файле usePrepIssue и там где вызывается issuesPrepGroupedByYear

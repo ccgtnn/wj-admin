@@ -2,11 +2,27 @@
 import { inject } from 'vue'
 
 const searchQuery = inject('issuesSearchQuery')
+
+const yearsList = inject('yearsList')
+const issuesFiltersList = inject('issuesFiltersList')
+const issuesFiltersIsActive = inject('issuesFiltersIsActive')
 </script>
 
 <template>
   <div class="filters">
     <!--filters-->
+    <AppFilter :is-active="issuesFiltersIsActive">
+      <AppDropMenu
+        :menu-list="yearsList"
+        start-item="ВСЕ"
+        :is-active="issuesFiltersList.year != 'ВСЕ'"
+        @choose="
+          (_item) => {
+            issuesFiltersList.year = _item
+          }
+        "
+      />
+    </AppFilter>
 
     <!--search-->
     <AppFilter :is-active="!!searchQuery">

@@ -25,12 +25,12 @@ export const useSectionsStore = defineStore('sections', () => {
   const getById = (id) =>
     sectionsList.value.find((section) => section.id === id)
 
-  const getByIssue = (issueId) =>
-    sectionsList.value.find((section) => section.issueId === issueId)
+  const getsByIssue = (issueId) =>
+    sectionsList.value.filter((section) => section.issueId === issueId)
 
   const getNewOrd = (issueId) => {
-    const sectionsByYear = getByIssue(issueId)
-    return getMaxOrd(sectionsByYear) + 1
+    const sectionsByIssue = getsByIssue(issueId)
+    return getMaxOrd(sectionsByIssue) + 1
   }
 
   const load = async () => {
@@ -47,12 +47,13 @@ export const useSectionsStore = defineStore('sections', () => {
 
   const create = async (sectionData) => {
     try {
-      sectionData.ord = getNewOrd(+sectionData.year)
+      sectionData.ord = getNewOrd(+sectionData.issueId)
       const newSection = await api.create(sectionData)
       sectionsList.value.unshift(newSection)
       sort()
       return newSection
     } catch (error) {
+      console.log(error)
       errorsStore.addError({ message: error.message })
     }
   }
@@ -82,7 +83,7 @@ export const useSectionsStore = defineStore('sections', () => {
 
   const handleOrderChange = async (operationFunction, section, to) => {
     try {
-      const sectionsByIssue = getByIssue(section.issueId)
+      const sectionsByIssue = getsByIssue(section.issueId)
       const changedItems = operationFunction(sectionsByIssue, section.id, to)
       for (const item of changedItems) {
         await api.update(item)
@@ -101,7 +102,7 @@ export const useSectionsStore = defineStore('sections', () => {
   return {
     sectionsList,
     getById,
-    getByIssue,
+    getsByIssue,
     load,
     create,
     update,

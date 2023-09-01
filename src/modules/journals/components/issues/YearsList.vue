@@ -9,14 +9,14 @@ const yearsPrepCount = inject('yearsPrepCount')
 <template>
   <div class="years-list">
     <div v-if="yearsPrepCount" class="yers-list__content _grid-one-column">
-      <AppCard
+      <div
         v-for="year in issuesPrepGroupedByYear"
         :key="year.id"
-        class="year"
+        class="years-list__item"
       >
         <div class="years-list__title">{{ year.year }} год</div>
         <IssuesList :issues-list="year.issuesList"></IssuesList>
-      </AppCard>
+      </div>
     </div>
 
     <div v-else class="_sub-text">НЕТ ДАННЫХ</div>
@@ -28,6 +28,6 @@ const yearsPrepCount = inject('yearsPrepCount')
   @apply py-2 text-sm opacity-50;
 }
 .years-list__title {
-  @apply p-2 font-bold;
+  @apply p-4 font-bold text-xl;
 }
 </style>

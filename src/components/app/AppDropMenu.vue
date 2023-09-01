@@ -12,10 +12,6 @@ export default {
       type: String,
       required: true,
     },
-    buttonCss: {
-      type: String,
-      default: '',
-    },
     isActive: {
       type: Boolean,
       default: false,

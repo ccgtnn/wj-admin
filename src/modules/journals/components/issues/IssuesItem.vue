@@ -1,8 +1,9 @@
 <script setup>
 import { useIssuesStore } from '../../stores/issues.store'
+import ModSections from '../sections/ModSections.vue'
 import ModIssuesEditor from './ModIssuesEditor.vue'
 
-const props = defineProps({
+defineProps({
   issuesItem: {
     type: Object,
     required: true,
@@ -20,10 +21,13 @@ const issuesStore = useIssuesStore()
         <div class="name__ru">{{ issuesItem.name }}</div>
         <div class="name__en">en: {{ issuesItem.en?.name }}</div>
       </div>
+      <div class="issue-item__edit">
+        <ModIssuesEditor type="edit" :issues-item="issuesItem" />
+      </div>
     </div>
 
-    <div class="item__actions">
-      <ModIssuesEditor type="edit" :issuesItem="issuesItem" />
+    <div class="issue-item__actions">
+      <ModSections :issue-id="issuesItem.id" />
     </div>
 
     <div class="item__order">
@@ -45,6 +49,6 @@ const issuesStore = useIssuesStore()
   @apply flex gap-4 items-center;
 }
 .issue-item__actions {
-  @apply flex gap-4 items-center;
+  @apply flex gap-2 items-center;
 }
 </style>
