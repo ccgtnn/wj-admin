@@ -29,7 +29,6 @@ const issuesStore = useIssuesStore()
 
     <div class="item__order">
       <AppOrderActions
-        :direction="'vertical'"
         @move-up="issuesStore.changeOrder(issuesItem, -1)"
         @move-down="issuesStore.changeOrder(issuesItem, 1)"
         @move-to-start="issuesStore.moveToStart(issuesItem)"
