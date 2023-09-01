@@ -2,19 +2,25 @@
 import { inject } from 'vue'
 import IssuesItem from './IssuesItem.vue'
 
-const issuesPrepGroupedByYear = inject('issuesPrepGroupedByYear')
-const issuesPrep = inject('issuesPrep')
-const issuesPrepCount = inject('issuesPrepCount')
+const props = defineProps({
+  issuesList: {
+    type: Array,
+    required: true,
+  },
+  count: {
+    type: Number,
+    default: 0,
+  },
+})
+
+console.log(props.issuesList)
 </script>
 
 <template>
-  {{ issuesPrepGroupedByYear }}
-  <div class="list">
-    <div class="list__count">Всего {{ issuesPrepCount }}</div>
-
-    <div v-if="issuesPrepCount" class="list__content _grid-one-column">
+  <div class="issues-list">
+    <div v-if="count" class="list__content _grid-one-column">
       <IssuesItem
-        v-for="item in issuesPrep"
+        v-for="item in issuesList"
         :key="item.id"
         :issues-item="item"
       />

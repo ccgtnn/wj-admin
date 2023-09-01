@@ -8,12 +8,12 @@ const props = defineProps({
     required: true,
   },
 })
-
 const issuesStore = useIssuesStore()
 </script>
 
 <template>
   <AppCard :isActive="issuesItem.isFull" class="item">
+    <!-- ??? isFull везде undefinded-->
     <div class="item__title">
       <div class="item__number">№ {{ issuesItem.number }}</div>
       <div class="item__year">{{ issuesItem.year }} г.</div>

@@ -57,11 +57,13 @@ export function usePrepIssues(options = {}) {
   })
 
   const issuesPrepCount = computed(() => issuesPrep.value.length)
+  const yearsPrepCount = computed(() => issuesPrepGroupedByYear.value.length)
 
   provide('issuesSearchQuery', search.searchQuery)
   provide('issuesPrep', issuesPrep)
   provide('issuesPrepGroupedByYear', issuesPrepGroupedByYear)
   provide('issuesPrepCount', issuesPrepCount)
+  provide('yearsPrepCount', yearsPrepCount)
 
   provide('issuesFiltersList', filters.filtersList)
   provide('issuesFiltersIsActive', filters.isActive)
