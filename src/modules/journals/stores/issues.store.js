@@ -86,8 +86,8 @@ export const useIssuesStore = defineStore('issues', () => {
 
   const handleOrderChange = async (operationFunction, issue, to) => {
     try {
-      const issuesByDay = getByYear(issue.year)
-      const changedItems = operationFunction(issuesByDay, issue.id, to)
+      const issuesByYear = getByYear(issue.year)
+      const changedItems = operationFunction(issuesByYear, issue.id, to)
       for (const item of changedItems) {
         await api.update(item)
       }

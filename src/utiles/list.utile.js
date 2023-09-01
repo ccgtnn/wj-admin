@@ -2,6 +2,10 @@ export function getMaxOrd(list) {
   return Math.max(...list.map((e) => e.ord), 0)
 }
 
+export function getMinOrd(list) {
+  return Math.min(...list.map((e) => e.ord), 0)
+}
+
 export function changeListOrder(list, id, to) {
   // Находим индекс элемента
   const index = list.findIndex((item) => item.id === id)
@@ -25,32 +29,24 @@ export function moveItemToStart(list, id) {
   const item = list.find((item) => item.id == id)
   if (!item) return []
 
-  const firstItem = list.find(
-    (item) => item.ord === Math.min(...list.map((item) => item.ord))
-  )
-  if (!firstItem || firstItem.id == id) return []
+  const minOrd = getMinOrd(list)
 
-  // swap ord values
-  const tempOrd = item.ord
-  item.ord = firstItem.ord
-  firstItem.ord = tempOrd
+  if (minOrd == item.ord) return []
 
-  return [item, firstItem]
+  item.ord = minOrd - 1
+
+  return [item]
 }
 
 export function moveItemToEnd(list, id) {
   const item = list.find((item) => item.id == id)
   if (!item) return []
 
-  const lastItem = list.find(
-    (item) => item.ord === Math.max(...list.map((item) => item.ord))
-  )
-  if (!lastItem || lastItem.id == id) return []
+  const maxOrd = getMaxOrd(list)
 
-  // swap ord values
-  const tempOrd = item.ord
-  item.ord = lastItem.ord
-  lastItem.ord = tempOrd
+  if (maxOrd == item.ord) return []
 
-  return [item, lastItem]
+  item.ord = maxOrd + 1
+
+  return [item]
 }
