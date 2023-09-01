@@ -1,12 +1,12 @@
 import { computed, provide } from 'vue'
 import { useIssuesStore } from '../../stores/issues.store'
-import { useIssuesTranslationStore } from '../../stores/issuesTranslation.store'
+import { useIssuesTransStore } from '../../stores/issuesTrans.store'
 import { useSearch } from '@/composables/app/search/useSearch'
 import { useFiltersIssues } from './useFiltersIssues'
 
 export function usePrepIssues(options = {}) {
   const issuesStore = useIssuesStore()
-  const issuesTranslationStore = useIssuesTranslationStore()
+  const issuesTransStore = useIssuesTransStore()
   const filters = useFiltersIssues()
 
   // Инициализируем поиск - передаём строку, составленную из полей объекта issue
@@ -26,7 +26,7 @@ export function usePrepIssues(options = {}) {
 
     data = data.map((e) => {
       // добавляем перевод на англ
-      e.en = issuesTranslationStore.getByIssueAndLang(e.id, 'en')
+      e.en = issuesTransStore.getByIssueAndLang(e.id, 'en')
 
       return e
     })

@@ -1,11 +1,8 @@
 <script setup>
-import { usePrepIssues } from '../../composables/issues/usePrepIssues'
-import ModIssuesEditor from './ModIssuesEditor.vue'
-import IssuesFilters from './IssuesFilters.vue'
-import YearsList from './YearsList.vue'
+import { usePrepSections } from '../../composables/sections/usePrepSections'
 
 // подготовка данных
-usePrepIssues()
+usePrepSections()
 </script>
 
 <template>
@@ -13,15 +10,10 @@ usePrepIssues()
     <div class="block__head">
       <div class="head__title">
         <h1>Издания</h1>
-        <ModIssuesEditor />
       </div>
-
-      <IssuesFilters />
     </div>
 
-    <div class="block__body">
-      <YearsList />
-    </div>
+    <div class="block__body"></div>
   </div>
 </template>
 

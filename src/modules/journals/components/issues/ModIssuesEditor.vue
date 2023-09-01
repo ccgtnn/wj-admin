@@ -1,7 +1,7 @@
 <script setup>
-import { computed, reactive, ref } from 'vue'
+import { computed, reactive } from 'vue'
 import { useIssuesStore } from '../../stores/issues.store'
-import { useIssuesTranslationStore } from '../../stores/issuesTranslation.store'
+import { useIssuesTransStore } from '../../stores/issuesTrans.store'
 
 const props = defineProps({
   issuesItem: {
@@ -15,11 +15,11 @@ const props = defineProps({
 })
 
 const issuesStore = useIssuesStore()
-const issuesTranslationStore = useIssuesTranslationStore()
+const issuesTransStore = useIssuesTransStore()
 
 // перевод на англ
 const issueItemEn = computed(() =>
-  issuesTranslationStore.getByIssueAndLang(props.issuesItem?.id, 'en')
+  issuesTransStore.getByIssueAndLang(props.issuesItem?.id, 'en'),
 )
 
 // управление модальным окном
@@ -97,25 +97,25 @@ async function save() {
 
     // добавляем перевод
     model.en.issueId = newIssue.id
-    await saveTranslation(model.en)
+    await saveTrans(model.en)
   }
   if (props.type == 'edit') {
     await issuesStore.update(model.issue)
 
     // добавляем/обновляем перевод
     model.en.issueId = model.issue.id
-    await saveTranslation(model.en)
+    await saveTrans(model.en)
   }
 
   modal.isOpen = false
 }
 
-async function saveTranslation(modelTranslation) {
+async function saveTrans(modelTrans) {
   // проверяем существование перевода по наличию id
-  if (!modelTranslation?.id) {
-    await issuesTranslationStore.create(modelTranslation)
+  if (!modelTrans?.id) {
+    await issuesTransStore.create(modelTrans)
   } else {
-    await issuesTranslationStore.update(modelTranslation)
+    await issuesTransStore.update(modelTrans)
   }
 }
 
