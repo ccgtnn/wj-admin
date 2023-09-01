@@ -3,6 +3,7 @@ import { usePrepIssues } from '../../composables/issues/usePrepIssues'
 import IssuesList from './IssuesList.vue'
 import ModIssuesEditor from './ModIssuesEditor.vue'
 import IssuesFilters from './IssuesFilters.vue'
+import YearsList from './YearsList.vue'
 
 // подготовка данных
 usePrepIssues()
@@ -20,7 +21,7 @@ usePrepIssues()
     </div>
 
     <div class="block__body">
-      <IssuesList />
+      <YearsList />
     </div>
   </div>
 </template>
