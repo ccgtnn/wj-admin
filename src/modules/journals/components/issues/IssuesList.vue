@@ -7,16 +7,12 @@ const props = defineProps({
     type: Array,
     required: true,
   },
-  count: {
-    type: Number,
-    default: 0,
-  },
 })
 </script>
 
 <template>
   <div class="issues-list">
-    <div v-if="count" class="list__content _grid-one-column">
+    <div v-if="issuesList.length" class="issues-list__content _grid-one-column">
       <IssuesItem
         v-for="item in issuesList"
         :key="item.id"

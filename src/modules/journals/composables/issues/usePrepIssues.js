@@ -12,7 +12,7 @@ export function usePrepIssues(options = {}) {
   // Инициализируем поиск - передаём строку, составленную из полей объекта issue
   const search = useSearch(
     (issue) =>
-      `${issue.name} ${issue.year} ${issue.number} ${issue.e?.name ?? ''}`
+      `${issue.name} ${issue.year} ${issue.number} ${issue.en?.name ?? ''}`
   )
 
   const issuesPrep = computed(() => {

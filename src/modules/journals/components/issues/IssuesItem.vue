@@ -12,12 +12,11 @@ const issuesStore = useIssuesStore()
 </script>
 
 <template>
-  <AppCard :isActive="issuesItem.isFull" class="item">
-    <!-- ??? isFull везде undefinded-->
-    <div class="item__title">
-      <div class="item__number">№ {{ issuesItem.number }}</div>
-      <div class="item__year">{{ issuesItem.year }} г.</div>
-      <div class="item__name">
+  <AppCard class="issue-item">
+    <div class="issue-item__title">
+      <div class="issue-item__number">№ {{ issuesItem.number }}</div>
+      <div class="issue-item__year">{{ issuesItem.year }} г.</div>
+      <div class="issue-item__name">
         <div class="name__ru">{{ issuesItem.name }}</div>
         <div class="name__en">en: {{ issuesItem.en?.name }}</div>
       </div>
@@ -39,13 +38,13 @@ const issuesStore = useIssuesStore()
 </template>
 
 <style scoped>
-.item {
+.issue-item {
   @apply py-2 flex justify-between gap-4 items-center;
 }
-.item__title {
+.issue-item__title {
   @apply flex gap-4 items-center;
 }
-.item__actions {
+.issue-item__actions {
   @apply flex gap-4 items-center;
 }
 </style>

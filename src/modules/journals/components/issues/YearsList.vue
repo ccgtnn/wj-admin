@@ -11,10 +11,7 @@ const yearsPrepCount = inject('yearsPrepCount')
     <div v-if="yearsPrepCount" class="yers-list__content _grid-one-column">
       <AppCard class="year" v-for="year in issuesPrepGroupedByYear">
         <div class="years-list__title">{{ year.year }} год</div>
-        <IssuesList
-          :issuesList="year.issuesList"
-          :count="year.issuesList.length"
-        ></IssuesList>
+        <IssuesList :issuesList="year.issuesList"></IssuesList>
       </AppCard>
     </div>
 
